@@ -4,7 +4,7 @@ from rest_framework import status #type: ignore
 from .models import Todo #type: ignore
 from .serializers import TodoSerializer
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def todo_list(request):
     if request.method == 'GET':
         todos = Todo.objects.all()
@@ -17,6 +17,11 @@ def todo_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'DELETE':
+        todos = Todo.objects.all()
+        todos.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'DELETE', 'PATCH'])
 def todo_detail(request, pk):

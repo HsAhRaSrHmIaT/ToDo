@@ -20,3 +20,11 @@ export const updateTodo = async (id, todo) => {
 export const deleteTodo = async (id) => {
     await axios.delete(`${TODO_API_BASE_URL}${id}/`);
 };
+
+export const editTodo = async (id, todo) => {
+    await axios.patch(`${TODO_API_BASE_URL}${id}/`, todo);
+};
+
+export const deleteAllTodos = async () => {
+    await axios.delete(TODO_API_BASE_URL);
+};
