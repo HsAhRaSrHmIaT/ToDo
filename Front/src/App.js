@@ -68,7 +68,8 @@ function App() {
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={handleCreate} className='top-button'>
+      
+      <button onClick={handleCreate} className='top-button' disabled={!newTodo}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"/>
         </svg>

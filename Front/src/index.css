@@ -29,7 +29,7 @@ h1 {
 
 /* Input and button styles */
 input[type="text"] {
-  width: 75%;
+  width: calc(100% - 135px);
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #ddd;
@@ -102,6 +102,12 @@ li button {
   margin-left: 10px;
 }
 
+.top-button:disabled {
+  background-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
 button.delete {
   background-color: #e74c3c;
 }
@@ -130,7 +136,7 @@ span {
   }
 
   input[type="text"] {
-    width: 100%;
+    width: 93%;
     margin-bottom: 10px;
   }
 
@@ -143,4 +149,9 @@ span {
     margin: 5px 0;
     width: 100%;
   }
+}
+
+.dark-mode {
+  background-color: #333;
+  color: white;
 }
