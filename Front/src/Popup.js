@@ -30,16 +30,20 @@ const Popup = ({ id, content, handleClose, onSave }) => {
                 <h3>Description</h3>
                 {isEditing ? (
                     <div>
-                        <textarea value={description} onChange={handleChange} />
+                        <textarea 
+                            value={description} 
+                            onChange={handleChange} 
+                            placeholder="Add a description"
+                        />
                         <button onClick={handleSaveClick}>Save</button>
                     </div>
                 ) : (
                     <div>
-                        <p>{description}</p>
-                        <button onClick={handleEditClick}>{description ? "Edit": "Add"}</button>
+                        <p>{description || "Add a description"}</p>
+                        <button onClick={handleEditClick}>{description ? "Edit" : "Add"}</button>
                     </div>
                 )}
-                <span className="close-icon" onClick={handleClose}>x</span>
+                <span className="close-icon" onClick={handleClose}>✖</span>
             </div>
         </div>
     );

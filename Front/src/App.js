@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getTodos, createTodo, updateTodo, deleteTodo, editTodo, deleteAllTodos } from './TodoService';
-import "./index.css";
+import "./App.css";
 import Popup from './Popup';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState(null);
   const [popupId, setPopupId] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchTodos();
@@ -26,10 +27,25 @@ function App() {
   };
 
   const handleCreate = async () => {
-    const todo = { title: newTodo, completed: false };
-    await createTodo(todo);
-    fetchTodos();
-    setNewTodo("");
+    if (newTodo.length > 50) {
+      setError('Title cannot exceed 50 characters');
+      setNewTodo('');
+      return;
+    }
+    try {
+      await createTodo(
+        {
+          title: newTodo,
+          completed: false,
+          description: ''
+        }
+      );
+      fetchTodos();
+      setNewTodo("");
+      setError('');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleUpdate = async (id, completed) => {
@@ -84,6 +100,7 @@ function App() {
       <input
         type="text"
         value={newTodo}
+        placeholder='Enter a title'
         onChange={(e) => setNewTodo(e.target.value)}
       />
       
@@ -92,6 +109,7 @@ function App() {
           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"/>
         </svg>
       </button>
+      {error && <p style={{ color: '#e74c3c' }}>{error}</p>}
       <button onClick={() => handleDeleteAll()} className='icon-button delete top-button'>
         <svg width="16" height="16" viewBox="0 0 24 24">
           <g transform="translate(-4,0)">
@@ -120,12 +138,7 @@ function App() {
               </>
             ) : (
               <>
-                <span
-                  style={{ 
-                    textDecoration: todo.completed ? "line-through" : "none", 
-                    color: todo.completed ? "grey" : "black"
-                  }}
-                >
+                <span>
                   <div className="todo-item">
                     <div className="todo-title">
                       <input
@@ -133,10 +146,14 @@ function App() {
                         checked={todo.completed}
                         onChange={() => handleUpdate(todo.id, todo.completed)}
                       />
+                      <span style={{ 
+                        textDecoration: todo.completed ? "line-through" : "none",
+                      }}>
                       {todo.title}
+                      </span>
                     </div>
                     <div 
-                      className="description" 
+                      className="description"
                       onClick={() => togglePopup(todo.id, todo.description)}
                     >
                         {todo.description 
