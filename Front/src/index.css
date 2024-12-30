@@ -116,6 +116,13 @@ button.delete:hover {
   background-color: #c0392b;
 }
 
+.description {
+  flex-grow: 1;
+  color: grey;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 /* Edit mode styles */
 li input[type="text"] {
   width: 60%;

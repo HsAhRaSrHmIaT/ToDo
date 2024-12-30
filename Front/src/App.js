@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { getTodos, createTodo, updateTodo, deleteTodo, editTodo, deleteAllTodos } from './TodoService';
 import "./index.css";
+import Popup from './Popup';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [content, setContent] = useState(null);
+  const [popupId, setPopupId] = useState(null);
 
   useEffect(() => {
     fetchTodos();
@@ -14,6 +18,12 @@ function App() {
     const data = await getTodos();
     setTodos(data);
   }
+
+  const togglePopup = (id, content) => {
+    setPopupId(id);
+    setContent(content);
+    setIsOpen(!isOpen);
+  };
 
   const handleCreate = async () => {
     const todo = { title: newTodo, completed: false };
@@ -60,6 +70,14 @@ function App() {
     fetchTodos();
   };
 
+  const handleSave = (id, description) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, description } : todo
+      )
+    );
+  }
+
   return (
     <div className="App">
       <h1>Todo App</h1>
@@ -75,11 +93,11 @@ function App() {
         </svg>
       </button>
       <button onClick={() => handleDeleteAll()} className='icon-button delete top-button'>
-      <svg width="16" height="16" viewBox="0 0 24 24">
+        <svg width="16" height="16" viewBox="0 0 24 24">
           <g transform="translate(-4,0)">
             <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2-5V9h8v10H8v-5zm2 0v3h4v-3h-4z"/>
           </g>
-          <text x="15" y="23" fill="currentColor" font-size="12" font-weight="bold" font-family="Arial">A</text>
+          <text x="15" y="23" fill="currentColor" fontSize="12" fontWeight="bold" fontFamily="Arial">A</text>
         </svg>
       </button>
       <ul>
@@ -108,12 +126,27 @@ function App() {
                     color: todo.completed ? "grey" : "black"
                   }}
                 >
-                  <input
-                    type="checkbox"
-                    checked={todo.completed}
-                    onChange={() => handleUpdate(todo.id, todo.completed)}
-                  />
-                  {todo.title}
+                  <div className="todo-item">
+                    <div className="todo-title">
+                      <input
+                        type="checkbox"
+                        checked={todo.completed}
+                        onChange={() => handleUpdate(todo.id, todo.completed)}
+                      />
+                      {todo.title}
+                    </div>
+                    <div 
+                      className="description" 
+                      onClick={() => togglePopup(todo.id, todo.description)}
+                    >
+                        {todo.description 
+                          ? (todo.description.length > 30 
+                              ? `${todo.description.substring(0, 30)}... read more` 
+                              : todo.description) 
+                          : 'Add description'
+                        }
+                    </div>
+                  </div>
                 </span>
                 <button onClick={() => handleEditClick(todo.id, todo.title)}>
                   <svg width="16" height="16" viewBox="0 0 24 24">
@@ -129,6 +162,7 @@ function App() {
             </button>
           </li>
         ))}
+        {isOpen && <Popup id={popupId} content={content} handleClose={togglePopup} onSave={handleSave} />}
       </ul>
     </div>
   );
