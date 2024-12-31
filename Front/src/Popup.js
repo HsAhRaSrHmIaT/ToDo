@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Popup.css';
 import { editTodo } from './TodoService';
 
-const Popup = ({ id, content, handleClose, onSave }) => {
+const Popup = ({ id, content, handleClose, onSave, completed }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [description, setDescription] = useState(content || "");
 

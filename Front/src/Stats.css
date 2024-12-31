@@ -1,0 +1,32 @@
+.sidebar {
+    margin-left: 2rem;
+    width: 20%;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    color: #c9c9c9;
+    position: fixed;
+    top: 2rem;
+    height: fit-content;
+  }
+  
+  .stats {
+    margin-bottom: 20px;
+  }
+  
+  .stats h2 {
+    margin-bottom: 10px;
+    color: #c9c9c9;
+  }
+  
+  .stats p {
+    margin: 5px 0;
+    color: #999;
+    font-weight: 100;
+  }
+  
+  .percentage {
+    color: rgb(97, 222, 241);
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+  }
