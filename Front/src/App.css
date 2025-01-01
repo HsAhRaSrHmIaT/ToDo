@@ -1,10 +1,10 @@
 .App {
-  max-width: 600px;
-  margin: 2rem auto;
+  max-width: 700px;
+  margin: 0 auto;
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(47, 47, 47, 0.3);
   border-radius: 8px;
   background-color: #1a1a1a;
+  /* height: 592px; /* Fixed height for the app container */
 }
 
 h1 {
@@ -15,7 +15,7 @@ h1 {
 
 /* Input and button styles */
 input[type="text"] {
-  width: calc(100% - 135px);
+  width: 82%;
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #333;
@@ -48,14 +48,34 @@ button:hover {
 .todo-title {
   display: flex;
   align-items: center;
-  /* margin-bottom: 1rem; */
 }
 
-/* List styles */
+/* List styles with vertical scrolling */
 ul {
   list-style: none;
   padding: 0;
   margin-top: 2rem;
+  max-height: 400px; /* Fixed height for the todo list */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  scrollbar-width: thin; /* Modern browsers - thinner scrollbar */
+  scrollbar-color: grey #2a2a2a; /* Grey scrollbar with dark background */
+  width: 100%; /* Ensures no content overflow */
+  box-sizing: border-box; /* Includes padding and border in width */
+}
+
+/* Scrollbar styling for Webkit-based browsers (Chrome, Safari) */
+ul::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: grey; /* Grey scrollbar color */
+  border-radius: 4px; /* Rounded scrollbar */
+}
+
+ul::-webkit-scrollbar-track {
+  background-color: #2a2a2a; /* Dark background for the track */
 }
 
 li {
@@ -101,6 +121,11 @@ li button {
   font-size: 12px;
 }
 
+.top-button {
+  height: 40px;
+  width: 40px;
+}
+
 .top-button + .top-button {
   margin-left: 10px;
 }
@@ -141,15 +166,29 @@ span {
 }
 
 /* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .App {
-    margin: 1rem;
+    margin: 0;
     padding: 1rem;
   }
 
   input[type="text"] {
-    width: 93%;
+    width: calc(100% - 70px);
+  }
+
+  .top-button + .top-button {
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  input[type="text"] {
+    width: 100%;
     margin-bottom: 10px;
+  }
+
+  .top-button {
+    width: calc(50% - 5px);
   }
 
   li {
@@ -161,8 +200,4 @@ span {
     margin: 5px 0;
     width: 100%;
   }
-}
-
-.edit:disabled {
-  display: none;
 }

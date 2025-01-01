@@ -3,6 +3,8 @@ import { getTodos, createTodo, updateTodo, deleteTodo, editTodo, deleteAllTodos 
 import "./App.css";
 import Popup from './Popup';
 import Stats from './Stats';
+import Stopwatch from './Stopwatch';
+import './layout.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -96,9 +98,12 @@ function App() {
   }
 
   return (
-    <>
+    <div className='container'>
     <div className='sidebar'>
         <Stats todos={todos} />
+    </div>
+    <div className='stopwatch'>
+        <Stopwatch />
     </div>
     <div className="App">
       <h1>Todo App</h1>
@@ -187,7 +192,7 @@ function App() {
         {isOpen && <Popup id={popupId} content={content} handleClose={togglePopup} onSave={handleSave} />}
       </ul>
     </div>
-    </>
+    </div>
   );
 }
 
