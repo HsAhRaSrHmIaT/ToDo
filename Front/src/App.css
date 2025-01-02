@@ -136,6 +136,45 @@ li button {
   cursor: not-allowed;
 }
 
+button:disabled {
+  background-color: #404040;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.priority {
+  display: inline-flex;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.priority .dot {
+  height: 3px;
+  width: 3px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.priority .low {
+  background-color: #2ecc71;
+}
+
+.priority .medium {
+  background-color: #f1c40f;
+}
+
+.priority .high {
+  background-color: #e74c3c;
+}
+
 button.delete {
   background-color: #404040;
   color: white;

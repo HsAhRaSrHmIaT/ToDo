@@ -175,6 +175,9 @@ function App() {
                     </div>
                   </div>
                 </span>
+                <div>
+                  <span className='priority'><span className='dot medium'></span>medium</span>
+                </div>
                 <button onClick={() => handleEditClick(todo.id, todo.title)} disabled={todo.completed} className="icon-button edit">
                   <svg width="16" height="16" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M16.293 2.293l-13.5 13.5c-0.117 0.117-0.197 0.265-0.231 0.427l-1.5 7.5c-0.111 0.553 0.425 1.036 0.969 0.864l7.5-2.25c0.159-0.048 0.305-0.134 0.422-0.251l13.5-13.5c0.391-0.391 0.391-1.024 0-1.414l-5.75-5.75c-0.391-0.391-1.024-0.391-1.414 0zM4.793 16.707l11.793-11.793 2.5 2.5-11.793 11.793-3.063 0.919 0.563-3.419z"/>
@@ -189,7 +192,7 @@ function App() {
             </button>
           </li>
         ))}
-        {isOpen && <Popup id={popupId} content={content} handleClose={togglePopup} onSave={handleSave} />}
+        {isOpen && <Popup id={popupId} content={content} handleClose={togglePopup} onSave={handleSave} completed={todos.find(todo => todo.id === popupId)?.completed} />}
       </ul>
     </div>
     <div className='extra-section'></div>

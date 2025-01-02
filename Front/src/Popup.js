@@ -7,7 +7,9 @@ const Popup = ({ id, content, handleClose, onSave, completed }) => {
     const [description, setDescription] = useState(content || "");
 
     const handleEditClick = () => {
-        setIsEditing(true);
+        if (!completed) {
+            setIsEditing(true);
+        }
     };
 
     const handleSaveClick = async () => {
@@ -39,8 +41,14 @@ const Popup = ({ id, content, handleClose, onSave, completed }) => {
                     </div>
                 ) : (
                     <div>
-                        <p>{description || "Add a description"}</p>
-                        <button onClick={handleEditClick}>{description ? "Edit" : "Add"}</button>
+                        <p>{description || (!completed ? "Add a description": "No description")}</p>
+                        <button 
+                            onClick={handleEditClick} 
+                            style={{ display: completed ? "none" : "" }}
+                            disabled={completed}
+                        >
+                            {description ? "Edit" : "Add"}
+                        </button>
                     </div>
                 )}
                 <span className="close-icon" onClick={handleClose}>✖</span>
@@ -48,5 +56,5 @@ const Popup = ({ id, content, handleClose, onSave, completed }) => {
         </div>
     );
 };
-  
+
 export default Popup;
