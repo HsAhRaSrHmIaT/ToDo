@@ -156,6 +156,7 @@ button.delete:hover {
 li input[type="text"] {
   width: 60%;
   margin-right: 10px;
+  background-color: #1a1a1a;
 }
 
 span {

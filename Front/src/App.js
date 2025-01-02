@@ -170,7 +170,7 @@ function App() {
                           ? (todo.description.length > 30 
                               ? `${todo.description.substring(0, 30)}... read more` 
                               : todo.description) 
-                          : 'Add description'
+                          : (todo.completed ? 'No description' : 'Add description')
                         }
                     </div>
                   </div>
@@ -192,6 +192,7 @@ function App() {
         {isOpen && <Popup id={popupId} content={content} handleClose={togglePopup} onSave={handleSave} />}
       </ul>
     </div>
+    <div className='extra-section'></div>
     </div>
   );
 }

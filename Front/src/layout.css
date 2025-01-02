@@ -11,8 +11,8 @@ body {
     grid-template-columns: 300px 2fr 1fr;
     grid-template-rows: auto 1fr 1fr;
     grid-template-areas: 
-      "stats main"
-      "stopwatch main";
+      "stats main extra"
+      "stopwatch main extra";
     min-height: 80vh;
     gap: 20px;
     padding: 20px;
@@ -35,14 +35,40 @@ body {
     width: 96%;
 }
 
+/* New extra section */
+.extra-section {
+    grid-area: extra;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    color: #fff;
+    overflow-y: auto; /* Enable vertical scrolling for long content */
+    margin-right: 2.5rem;
+}
+
+/* Scrollbar styles for extra section */
+.extra-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.extra-section::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 4px;
+}
+
+.extra-section::-webkit-scrollbar-track {
+    background-color: #2a2a2a;
+}
+
 @media (max-width: 900px) {
     .container {
       grid-template-columns: 1fr;
-      grid-template-rows: auto auto 1fr;
+      grid-template-rows: auto auto auto 1fr;
       grid-template-areas: 
         "stats"
         "stopwatch"
-        "main";
+        "main"
+        "extra";
       padding: 10px;
       gap: 10px;
       position: static;
