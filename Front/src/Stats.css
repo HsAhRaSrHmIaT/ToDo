@@ -1,0 +1,34 @@
+.stats {
+    color: #c9c9c9;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 2rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .stats h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .stats p {
+    color: #808080;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .percentage {
+    color: #61def1;
+    font-size: 3rem;
+    font-weight: bold;
+    display: block;
+  }
+  
+  @media (max-width: 900px) {
+    .stats {
+      padding: 1.5rem;
+    }
+  }
