@@ -4,6 +4,7 @@ body {
     padding: 0;
     min-height: 100vh;
     background-color: #121212;
+    margin-top: 1rem;
 }
 
 .container {
@@ -44,6 +45,7 @@ body {
     color: #fff;
     overflow-y: auto; /* Enable vertical scrolling for long content */
     margin-right: 2.5rem;
+    margin-left: 2rem;
 }
 
 /* Scrollbar styles for extra section */
