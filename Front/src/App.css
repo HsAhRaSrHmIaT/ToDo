@@ -1,5 +1,5 @@
 .App {
-  max-width: 700px;
+  max-width: 700px auto;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 8px;
@@ -9,13 +9,13 @@
 
 h1 {
   text-align: center;
-  color: #c9c9c9;
+  color: white;
   margin-bottom: 2rem;
 }
 
 /* Input and button styles */
 input[type="text"] {
-  width: 82%;
+  width: 80%;
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #333;
@@ -122,18 +122,93 @@ li button {
 }
 
 .top-button {
-  height: 40px;
-  width: 40px;
+  margin-top: 10px;
 }
 
 .top-button + .top-button {
   margin-left: 10px;
 }
 
+.date-time input {
+  border-radius: 4px;
+}
+
 .top-button:disabled {
   background-color: #404040;
   color: #666;
   cursor: not-allowed;
+}
+
+button:disabled {
+  background-color: #404040;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.priority-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.priority-button:not(.active) {
+  display: none;
+}
+
+.priority-button.active {
+  display: inline-flex;
+}
+
+.priority-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.priority-button:disabled:hover {
+  background-color: #404040;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.priority-button .expired {
+  color: #e74c3c;
+}
+
+.priority-button .expired:hover + .priority-button {
+  cursor: not-allowed;
+}
+
+.priority-button:hover {
+  background-color: #555;
+}
+
+.dot {
+  height: 3px;
+  width: 3px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.dot.low {
+  background-color: #2ecc71;
+}
+
+.dot.medium {
+  background-color: #f1c40f;
+}
+
+.dot.high {
+  background-color: #e74c3c;
 }
 
 button.delete {
