@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Popup.css';
 import { editTodo } from './TodoService';
 
-const Popup = ({ id, content, handleClose, onSave, completed }) => {
+const Popup = ({ id, content, handleClose, onSave, completed, expired }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [description, setDescription] = useState(content || "");
 
@@ -45,7 +45,7 @@ const Popup = ({ id, content, handleClose, onSave, completed }) => {
                         <button 
                             onClick={handleEditClick} 
                             style={{ display: completed ? "none" : "" }}
-                            disabled={completed}
+                            disabled={completed || expired}
                         >
                             {description ? "Edit" : "Add"}
                         </button>

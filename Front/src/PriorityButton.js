@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PriorityButton = ({ priority, onPriorityChange }) => {
+const PriorityButton = ({ priority, onPriorityChange, completed, expired }) => {
   const priorities = ['low', 'medium', 'high'];
   
   const handleClick = () => {
@@ -14,9 +14,14 @@ const PriorityButton = ({ priority, onPriorityChange }) => {
       <button
         onClick={handleClick}
         className={`priority-button active`}
+        disabled={completed || expired}
       >
-        <span className={`dot ${priority}`}></span>
-        {priority}
+        {expired ? <div className="expired">expired</div> : (completed ? 'completed' : 
+          (<>
+            <span className={`dot ${priority}`}></span>
+            {priority}
+          </>)
+       )}
       </button>
     </div>
   );

@@ -21,6 +21,9 @@ function App() {
   const [content, setContent] = useState(null);
   const [popupId, setPopupId] = useState(null);
   const [error, setError] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [editingTitle, setEditingTitle] = useState("");
+  // const [reminderTime, setReminderTime] = useState("");
 
   useEffect(() => {
     fetchTodos();
@@ -48,10 +51,12 @@ function App() {
         title: newTodo,
         completed: false,
         description: "",
+        // reminder_time: reminderTime,
       });
       fetchTodos();
       setNewTodo("");
       setError("");
+      // setReminderTime("");
     } catch (error) {
       console.error(error);
     }
@@ -79,9 +84,6 @@ function App() {
     await deleteTodo(id);
     fetchTodos();
   };
-
-  const [editingId, setEditingId] = useState(null);
-  const [editingTitle, setEditingTitle] = useState("");
 
   const handleEditClick = (id, title) => {
     setEditingId(id);
@@ -116,26 +118,24 @@ function App() {
         <Stopwatch />
       </div>
       <div className="App">
-        <h1>Todo App</h1>
+        <h1>Todo List</h1>
         <input
           type="text"
           value={newTodo}
           placeholder="Enter a title"
           onChange={(e) => setNewTodo(e.target.value)}
         />
-
+        {/* <input type="datetime-local" onChange={(e) => setReminderTime(e.target.value)} /> */}
         <button
           onClick={handleCreate}
           className="top-button"
           disabled={!newTodo}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="16"
-            height="16"
-          >
-            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff" />
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M12 10v-6h2v6h6v2h-6v6h-2v-6h-6v-2h6z"
+            />
           </svg>
         </button>
         {error && <p style={{ color: "#e74c3c" }}>{error}</p>}
@@ -203,6 +203,7 @@ function App() {
                           type="checkbox"
                           checked={todo.completed}
                           onChange={() => handleUpdate(todo.id, todo.completed)}
+                          disabled={todo.expired}
                         />
                         <span
                           style={{
@@ -225,7 +226,7 @@ function App() {
                                 30
                               )}... read more`
                             : todo.description
-                          : todo.completed
+                          : todo.completed || todo.expired
                           ? "No description"
                           : "Add description"}
                       </div>
@@ -237,11 +238,13 @@ function App() {
                       onPriorityChange={(priority) =>
                         handleEdit(todo.id, { priority })
                       }
+                      completed={todo.completed}
+                      expired={todo.expired}
                     />
                   </div> 
                   <button
                     onClick={() => handleEditClick(todo.id, todo.title)}
-                    disabled={todo.completed}
+                    disabled={todo.completed || todo.expired}
                     className="icon-button edit"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24">
@@ -273,6 +276,7 @@ function App() {
               handleClose={togglePopup}
               onSave={handleSave}
               completed={todos.find((todo) => todo.id === popupId)?.completed}
+              expired={todos.find((todo) => todo.id === popupId)?.expired}
             />
           )}
         </ul>

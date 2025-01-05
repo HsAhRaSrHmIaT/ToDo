@@ -9,7 +9,7 @@
 
 h1 {
   text-align: center;
-  color: #c9c9c9;
+  color: white;
   margin-bottom: 2rem;
 }
 
@@ -129,6 +129,10 @@ li button {
   margin-left: 10px;
 }
 
+.date-time input {
+  border-radius: 4px;
+}
+
 .top-button:disabled {
   background-color: #404040;
   color: #666;
@@ -165,6 +169,20 @@ button:disabled {
   font-size: 12px;
   margin-bottom: 5px;
   cursor: pointer;
+}
+
+.priority-button:disabled:hover {
+  background-color: #404040;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.priority-button .expired {
+  color: #e74c3c;
+}
+
+.priority-button .expired:hover + .priority-button {
+  cursor: not-allowed;
 }
 
 .priority-button:hover {
